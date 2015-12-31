@@ -64,7 +64,25 @@ public class FileParser {
 			parsedFile.add("");
 			return;
 		}
-		
+		else if(aLineNum >= 1 && words.length == 2){
+			try{
+				//No Blank Line Between questions
+				if((currQuestion + 1) == Integer.parseInt(words[0].replaceAll("[^0-9]", ""))){
+					aLineNum = 0;
+					++currQuestion;
+					parsedFile.add("<p>");
+					parsedFile.add("");
+					++aLineNum;
+					parsedFile.add("");
+					parsedFile.add("Question: " + currQuestion);
+					parsedFile.add("");
+					parsedFile.add(boldNot(words[1]) + "<p>");
+					return;
+				}
+				
+			}
+			catch(Exception e){}
+		}
 		//Check if its the actual question
 		if(aLineNum == 0){		
 			//Valid question I.E. split into two and first word is a number
